@@ -71,7 +71,7 @@ class MyEventsTableController: UITableViewController {
         cell.timeLabel.text = "12 : 00"
         cell.dateLabel.text = self.eventsDictionary[indexPath.row]["eventDate"]!
         
-        print("change made")
+        print("change reversed")
         return cell
     }
     
