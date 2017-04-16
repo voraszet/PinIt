@@ -47,15 +47,20 @@ class FriendRequestTableViewController: UITableViewController {
         cell.acceptButtonOutlet.tag = indexPath.row
         cell.declineButtonOutlet.tag = indexPath.row
         
-        
-        
         return cell
     }
     
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 160
+    }
     
+    func ha(){
+        print("ha!")
+    }
     
     
     func accept(sender: UIButton){
+        print("accept")
         let ButtonTag = sender.tag
         
         let userId = friendRequestsDictionary[ButtonTag]["userId"]
@@ -67,13 +72,22 @@ class FriendRequestTableViewController: UITableViewController {
         self.ref.child("users").child(self.currentUser!).child("friends").child(userKey!).setValue(userData)
         self.ref2.child("users").child(userId!).child("friends").childByAutoId().setValue(acceptRequest){ (error, ref) -> Void in
             
-            self.friendRequestsDictionary.removeAll()
+            
+            
+            
+            self.friendRequestsDictionary.remove(at: ButtonTag)
             self.tableView.reloadData()
+            
+            if self.friendRequestsDictionary.count < 1 {
+                self.friendRequestsDictionary.removeAll()
+            }
         }
 
     }
     
     func decline(sender: UIButton){
+        print("decline")
+        
         let ButtonTag = sender.tag
         let userKey = friendRequestsDictionary[ButtonTag]["userKey"]
         self.ref.child("users").child(self.currentUser!).child("friends").child(userKey!).removeValue()

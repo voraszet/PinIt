@@ -12,12 +12,15 @@ import Firebase
 class MyFriendsEventsTableViewTableViewController: UITableViewController {
     
     var eventsDictionary = [[String:String]]()
+    let ref = FIRDatabase.database().reference(fromURL: "https://locationapp-85fdc.firebaseio.com/")
+    let currentUser = FIRAuth.auth()?.currentUser?.uid
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.tableView.contentInset = UIEdgeInsetsMake(35, 0, 0, 0);
         
-        self.tableView.contentInset = UIEdgeInsetsMake(+36, 0, 0, 0);
-        self.loadEvents()
+        //self.loadEvents()
+        self.friendEventList()
     }
     
     func loadEvents(){
@@ -43,7 +46,6 @@ class MyFriendsEventsTableViewTableViewController: UITableViewController {
                     
                     self.eventsDictionary.append(eventsArray as! [String: String])
                     self.tableView.reloadData()
-                    print(self.eventsDictionary)
                 }
             }
         })
@@ -61,6 +63,8 @@ class MyFriendsEventsTableViewTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = Bundle.main.loadNibNamed("FriendsEventsCell", owner: self, options: nil)?.first as! FriendsEventsCell
         
+        cell.statusButton.addTarget(self, action: #selector(hi), for: .touchUpInside)
+        
         cell.titleLabel.text = self.eventsDictionary[indexPath.row]["eventName"]!
         cell.districtLabel.text = "Essex"
         cell.timeLabel.text = "12 : 15"
@@ -74,6 +78,56 @@ class MyFriendsEventsTableViewTableViewController: UITableViewController {
         return 150
     }
     
+    func friendEventList(){
+        self.ref.child("users").child(self.currentUser!).child("friends").observe(.value, with: { snapshot in 
+            //self.usersDictionary.removeAll()
+            
+            for snap in snapshot.children {    
+                let keyValueSnap = snap as! FIRDataSnapshot
+                print(keyValueSnap.key)
+                	
+                if let x = keyValueSnap.value as? [String:Any] {
+                    let friendBooleanValue = x.first!.value as? String
+                    
+                    if friendBooleanValue == "true" {
+                        let friendId = x.first!.key
+                        
+                        self.loadFriendEvents(userId : friendId)
+                    }
+                }    
+            }
+        })
+    }
+    
+    func loadFriendEvents(userId : String) {
+        self.ref.child("events").queryOrdered(byChild: "userId").queryEqual(toValue: userId).observe(.value, with: { snapshot in 
+            for child in (snapshot.children) {
+                let snap = child as! FIRDataSnapshot
+                let dict = snap.value as! [String: String]
+                
+                let eventsArray = ["eventName" : dict["eventName"],
+                                   "userId": userId,
+                                   "eventId": snap.key,
+                                   "eventDate": dict["eventDate"],
+                                   "eventDescription" : dict["eventDescription"],
+                                   "eventCity" : dict["eventCity"]
+                ]
+                
+                
+                self.eventsDictionary.append(eventsArray as! [String: String])
+                self.tableView.reloadData()
+            }
+            
+        })
+    }
+    
+
+    
+    func hi(){
+        print("hi")
+    }
+    
+
     
 
    
