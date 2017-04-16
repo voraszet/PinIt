@@ -23,17 +23,20 @@ class EventsViewController: UIViewController {
         
     }
     
+    //SHOW CURRENT USER EVENTS
     @IBAction func showUserEvents() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let view: MyEventsTableController = storyboard.instantiateViewController(withIdentifier: "MyEventsTableController") as! MyEventsTableController
-        
-        
-        // query here        
-        
-        
-        //
         self.present(view, animated: true, completion: nil)
     }
+    
+    //SHOW EVENTS OF YOUR FRIENDS
+    @IBAction func showFriendsEvents() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let view: MyFriendsEventsTableViewTableViewController = storyboard.instantiateViewController(withIdentifier: "MyFriendsEventsTableViewTableViewController") as! MyFriendsEventsTableViewTableViewController
+        self.present(view, animated: true, completion: nil)
+    }
+    
     
     
     
