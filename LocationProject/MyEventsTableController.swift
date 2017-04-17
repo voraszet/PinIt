@@ -76,9 +76,49 @@ class MyEventsTableController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 150
+        return 145
     }
     
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let eventId = self.eventsDictionary[indexPath.row]["eventId"]!
+        self.getSingleChatLog(eventId : eventId)
+    }
+
+    
+    
+    
+    
+    
+    
+    ///////////////////////////////////
+    // TRANSITION TO GROUP MESSAGING //
+    ///////////////////////////////////
+    
+    func getSingleChatLog( eventId : String ){
+        let ref = FIRDatabase.database().reference(fromURL: "https://locationapp-85fdc.firebaseio.com/").child("event_messages").child(eventId)
+        print(eventId)
+        ref.observe(.value, with: { snapshot in
+            
+            for snapshotValues in snapshot.children {
+                let userSnap = snapshotValues as! FIRDataSnapshot
+                
+                if let x = userSnap.value as? [String:Any] {
+                    //self.transitionToSingleChatLog(userId: x["userId"]! as! String, userName: x["userName"]! as! String)
+                }
+            }
+        })
+    }
+    
+    func transitionToSingleChatLog(userId : String, userName : String){
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let view: SingleChatViewController = storyboard.instantiateViewController(withIdentifier: "SingleChatViewController") as! SingleChatViewController
+        
+        view.userName = "Test"
+        view.userId = "ABC-255-XX"
+        
+        self.present(view, animated: true, completion: nil) 
+    }
     
     
     

@@ -34,6 +34,9 @@
 		B0AD584C1E6D83F9006979C3 /* UserEventsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0AD584B1E6D83F9006979C3 /* UserEventsController.swift */; };
 		B0AF573F1E9D084C00B826DD /* AddFriendPopupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0AF573E1E9D084C00B826DD /* AddFriendPopupController.swift */; };
 		B0B0DBC91E9F98EF004F9F83 /* FriendRequestsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B0DBC81E9F98EF004F9F83 /* FriendRequestsController.swift */; };
+		B0C36F571EA5007F0065E4AB /* EventMessagesTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0C36F561EA5007F0065E4AB /* EventMessagesTableVC.swift */; };
+		B0C36F5B1EA5014A0065E4AB /* EventMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0C36F591EA5014A0065E4AB /* EventMessageCell.swift */; };
+		B0C36F5C1EA5014A0065E4AB /* EventMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0C36F5A1EA5014A0065E4AB /* EventMessageCell.xib */; };
 		B0D5896F1E53868A0008BE2F /* MainPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0D5896E1E53868A0008BE2F /* MainPageViewController.swift */; };
 		B0F2B7C81E6F16E70017C742 /* Events.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F2B7C71E6F16E70017C742 /* Events.swift */; };
 		B0FD403F1E6DC4CE00D7E242 /* SingleEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0FD403E1E6DC4CE00D7E242 /* SingleEventViewController.swift */; };
@@ -85,6 +88,9 @@
 		B0AD584B1E6D83F9006979C3 /* UserEventsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserEventsController.swift; sourceTree = "<group>"; };
 		B0AF573E1E9D084C00B826DD /* AddFriendPopupController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFriendPopupController.swift; sourceTree = "<group>"; };
 		B0B0DBC81E9F98EF004F9F83 /* FriendRequestsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendRequestsController.swift; sourceTree = "<group>"; };
+		B0C36F561EA5007F0065E4AB /* EventMessagesTableVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventMessagesTableVC.swift; sourceTree = "<group>"; };
+		B0C36F591EA5014A0065E4AB /* EventMessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventMessageCell.swift; sourceTree = "<group>"; };
+		B0C36F5A1EA5014A0065E4AB /* EventMessageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventMessageCell.xib; sourceTree = "<group>"; };
 		B0D5896E1E53868A0008BE2F /* MainPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainPageViewController.swift; sourceTree = "<group>"; };
 		B0F2B7C71E6F16E70017C742 /* Events.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Events.swift; sourceTree = "<group>"; };
 		B0FD403E1E6DC4CE00D7E242 /* SingleEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleEventViewController.swift; sourceTree = "<group>"; };
@@ -189,14 +195,12 @@
 				B045B1E11E68486400E8C89D /* AddEventsViewController.swift */,
 				B0F2B7C71E6F16E70017C742 /* Events.swift */,
 				B04EA3691EA1416100F89909 /* MyEventsTableController.swift */,
+				B0C36F581EA5010D0065E4AB /* Cells */,
 				B0FD403E1E6DC4CE00D7E242 /* SingleEventViewController.swift */,
-				B064E2C01EA3EDB10059BCE9 /* FriendsEventsCell.swift */,
-				B064E2C11EA3EDB10059BCE9 /* FriendsEventsCell.xib */,
 				B02AEFFC1E53A43C002DEAAA /* EventsViewController.swift */,
 				B0AD584B1E6D83F9006979C3 /* UserEventsController.swift */,
-				B04EA36F1EA1501700F89909 /* MyEventsCell.swift */,
-				B04EA3701EA1501700F89909 /* MyEventsCell.xib */,
 				B064E2BA1EA3E3970059BCE9 /* MyFriendsEventsTableViewTableViewController.swift */,
+				B0C36F561EA5007F0065E4AB /* EventMessagesTableVC.swift */,
 			);
 			name = Events;
 			sourceTree = "<group>";
@@ -220,6 +224,19 @@
 				B0B0DBC81E9F98EF004F9F83 /* FriendRequestsController.swift */,
 			);
 			name = User_Friends;
+			sourceTree = "<group>";
+		};
+		B0C36F581EA5010D0065E4AB /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				B04EA36F1EA1501700F89909 /* MyEventsCell.swift */,
+				B04EA3701EA1501700F89909 /* MyEventsCell.xib */,
+				B064E2C11EA3EDB10059BCE9 /* FriendsEventsCell.xib */,
+				B064E2C01EA3EDB10059BCE9 /* FriendsEventsCell.swift */,
+				B0C36F591EA5014A0065E4AB /* EventMessageCell.swift */,
+				B0C36F5A1EA5014A0065E4AB /* EventMessageCell.xib */,
+			);
+			name = Cells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -321,6 +338,7 @@
 				B082B5B41E9FE34B00F55EED /* TableViewCell.xib in Resources */,
 				B04EA3721EA1501700F89909 /* MyEventsCell.xib in Resources */,
 				B01523701E4A20070043AC2C /* LaunchScreen.storyboard in Resources */,
+				B0C36F5C1EA5014A0065E4AB /* EventMessageCell.xib in Resources */,
 				B015236D1E4A20070043AC2C /* Assets.xcassets in Resources */,
 				B064E2C31EA3EDB10059BCE9 /* FriendsEventsCell.xib in Resources */,
 				B015236B1E4A20070043AC2C /* Main.storyboard in Resources */,
@@ -438,6 +456,7 @@
 				B064E2BB1EA3E3970059BCE9 /* MyFriendsEventsTableViewTableViewController.swift in Sources */,
 				B082B5B31E9FE34B00F55EED /* TableViewCell.swift in Sources */,
 				B0D5896F1E53868A0008BE2F /* MainPageViewController.swift in Sources */,
+				B0C36F571EA5007F0065E4AB /* EventMessagesTableVC.swift in Sources */,
 				B04EA36A1EA1416100F89909 /* MyEventsTableController.swift in Sources */,
 				B0F2B7C81E6F16E70017C742 /* Events.swift in Sources */,
 				B099108E1E67593500F60380 /* MapViewController.swift in Sources */,
@@ -445,6 +464,7 @@
 				B01523681E4A20070043AC2C /* ViewController.swift in Sources */,
 				B0FD403F1E6DC4CE00D7E242 /* SingleEventViewController.swift in Sources */,
 				B0AD584C1E6D83F9006979C3 /* UserEventsController.swift in Sources */,
+				B0C36F5B1EA5014A0065E4AB /* EventMessageCell.swift in Sources */,
 				B09910921E676A2A00F60380 /* ChatViewController.swift in Sources */,
 				B064E2C21EA3EDB10059BCE9 /* FriendsEventsCell.swift in Sources */,
 				B082B5AC1E9FE24900F55EED /* FriendRequestTableViewController.swift in Sources */,

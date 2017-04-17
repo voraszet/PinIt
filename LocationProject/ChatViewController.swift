@@ -47,7 +47,7 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
             
             for snap in snapshot.children {    
                 let keyValueSnap = snap as! FIRDataSnapshot
-            
+                
                 if let keyValue = keyValueSnap.value as? [String:Any] {
                     
                     let friendBooleanValue = keyValue.first!.value as? String
@@ -56,18 +56,16 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
                         let userId = keyValue.first!.key as? String
                         atleastone = true
                         self.ref.child("users").child(userId!).observe(.value, with: { snapshot in 
-                                let snap = snapshot as! FIRDataSnapshot
-                                if let x = snap.value as? [String:Any]{
-                                    let userArray = ["userName" : x["userName"]!,
-                                                     "userId": x["userId"]!
-                                    ]
-                                    
-                                    self.usersDictionary.append(userArray as! [String:String])
-                                    self.tableView.reloadData()
-                                    
-                                    
-                                    
-                                }
+                            let snap = snapshot as! FIRDataSnapshot
+                            if let x = snap.value as? [String:Any]{
+                                let userArray = ["userName" : x["userName"]!,
+                                                 "userId": x["userId"]!
+                                ]
+                                
+                                self.usersDictionary.append(userArray as! [String:String])
+                                self.tableView.reloadData()
+                                
+                            }
                             
                         })
                     } 
@@ -83,28 +81,6 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
             
         })
         
-        
-        
-        
-        /*ref.child("users").observe(.value, with: { snapshot in
-            for snapshotValues in snapshot.children {
-                let user = snapshotValues as! FIRDataSnapshot
-                print("User - \(user)")
-                if let x = user.value as? [String:Any] {
-                    let userName = x["userName"]!
-                    let userId = x["userId"]!
-
-                    let userArray = ["userName" : x["userName"]!,
-                                     "userId": x["userId"]!
-                    ]
-
-                    self.usersDictionary.append(userArray as! [String:String])
-                    self.tableView.reloadData()
-
-                }
-                
-            }
-        }) */
     }
     
     // OPEN ONE TO ONE USER CHAT
@@ -136,7 +112,7 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     // ADD FRIENDS BUTTON
     @IBAction func addFriendAction() {
-
+        
         let popForm = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AddFriendPopupController") as! AddFriendPopupController
         self.addChildViewController(popForm)
         popForm.view.frame = self.view.frame
@@ -159,7 +135,7 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
         cell.textLabel?.text = self.usersDictionary[indexPath.row]["userName"]
         cell.detailTextLabel?.text = self.usersDictionary[indexPath.row]["userId"] 
-    
+        
         return cell
     }
     
@@ -174,12 +150,12 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     
     
-  
     
     
     
     
     
     
-
+    
+    
 }

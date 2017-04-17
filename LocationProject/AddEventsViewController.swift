@@ -74,6 +74,9 @@ class AddEventsViewController: UIViewController {
                 } else {
                     let value = snapshot.value as?  NSDictionary
                     let username = value?["userName"] as? String ?? ""
+                    let eventId = ref.child("events").childByAutoId().key
+                    
+                    
                     let data = ["userName": username,
                                 "userId": userId!,
                                 "eventName": eventName!,
@@ -82,18 +85,31 @@ class AddEventsViewController: UIViewController {
                                 "eventAddress1": address1!,
                                 "eventAddress2": address2!,
                                 "eventCity": city!,
-                                "eventPostcode": postcode!
+                                "eventPostcode": postcode!,
+                                "eventId": eventId
                     ]
                     
-                    ref.child("events").childByAutoId().setValue(data)
+                    ref.child("events").child(eventId).setValue(data)
+                    
+                    //
+                    //let messageData = ["messageId": messageId1, "userName":username, "message": message!]
+                    //self.ref.child("messages").child(messageId1).childByAutoId().setValue(messageData)
+                    ref.child("event_messages").child(eventId).childByAutoId().setValue([""])
+                    
                 }
             })
+            
+            // SAVE EVENT ID 
+            
+            
+            
+            
             let alertBox = UIAlertController(title: "Note!", message: "You have added an event!", preferredStyle: UIAlertControllerStyle.alert)
             alertBox.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
                 self.loadEventsView()
             }))
             self.present(alertBox, animated: true, completion: nil)
-        }
+         }
     }
     
     func loadEventsView(){

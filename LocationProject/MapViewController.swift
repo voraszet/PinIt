@@ -31,6 +31,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let location = locations[locations.count - 1]
         
+        
+        print("YOU LOCATION IS \(location.coordinate.latitude)")
+        
+        
         self.displayMap(long: location.coordinate.longitude, lat: location.coordinate.latitude)
     }
     
