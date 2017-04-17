@@ -82,7 +82,7 @@ class MyEventsTableController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let eventId = self.eventsDictionary[indexPath.row]["eventId"]!
-        self.getSingleChatLog(eventId : eventId)
+        //self.getSingleChatLog(eventId : eventId)
     }
 
     
@@ -95,7 +95,7 @@ class MyEventsTableController: UITableViewController {
     // TRANSITION TO GROUP MESSAGING //
     ///////////////////////////////////
     
-    func getSingleChatLog( eventId : String ){
+    /* func getSingleChatLog( eventId : String ){
         let ref = FIRDatabase.database().reference(fromURL: "https://locationapp-85fdc.firebaseio.com/").child("event_messages").child(eventId)
         print(eventId)
         ref.observe(.value, with: { snapshot in
@@ -118,7 +118,7 @@ class MyEventsTableController: UITableViewController {
         view.userId = "ABC-255-XX"
         
         self.present(view, animated: true, completion: nil) 
-    }
+    } */
     
     
     
