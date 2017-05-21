@@ -27,17 +27,31 @@
 		B082B5AC1E9FE24900F55EED /* FriendRequestTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B082B5AB1E9FE24900F55EED /* FriendRequestTableViewController.swift */; };
 		B082B5B31E9FE34B00F55EED /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B082B5B11E9FE34B00F55EED /* TableViewCell.swift */; };
 		B082B5B41E9FE34B00F55EED /* TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B082B5B21E9FE34B00F55EED /* TableViewCell.xib */; };
+		B0879ED61EA8E43700190D56 /* EventRequestsTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0879ED51EA8E43700190D56 /* EventRequestsTableView.swift */; };
+		B0879EDA1EA8E6D600190D56 /* EventRequestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0879ED81EA8E6D600190D56 /* EventRequestCell.swift */; };
+		B0879EDB1EA8E6D600190D56 /* EventRequestCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0879ED91EA8E6D600190D56 /* EventRequestCell.xib */; };
 		B099108E1E67593500F60380 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B099108D1E67593500F60380 /* MapViewController.swift */; };
 		B09910901E675A3800F60380 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B099108F1E675A3800F60380 /* MapKit.framework */; };
 		B09910921E676A2A00F60380 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B09910911E676A2A00F60380 /* ChatViewController.swift */; };
+		B0A1F96C1ED07DD000825D95 /* MyEventsHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A1F96A1ED07DD000825D95 /* MyEventsHeaderCell.swift */; };
+		B0A1F96D1ED07DD000825D95 /* MyEventsHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0A1F96B1ED07DD000825D95 /* MyEventsHeaderCell.xib */; };
 		B0A2135B1E7FF08C003F5D2F /* SingleChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A2135A1E7FF08C003F5D2F /* SingleChatViewController.swift */; };
 		B0AD584C1E6D83F9006979C3 /* UserEventsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0AD584B1E6D83F9006979C3 /* UserEventsController.swift */; };
 		B0AF573F1E9D084C00B826DD /* AddFriendPopupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0AF573E1E9D084C00B826DD /* AddFriendPopupController.swift */; };
 		B0B0DBC91E9F98EF004F9F83 /* FriendRequestsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B0DBC81E9F98EF004F9F83 /* FriendRequestsController.swift */; };
+		B0B402BB1EA7CA54009CB1BA /* SingleEventHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B402B91EA7CA54009CB1BA /* SingleEventHeaderCell.swift */; };
+		B0B402BC1EA7CA54009CB1BA /* SingleEventHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0B402BA1EA7CA54009CB1BA /* SingleEventHeaderCell.xib */; };
+		B0B402BF1EA7D6A1009CB1BA /* MembersHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B402BD1EA7D6A1009CB1BA /* MembersHeaderCell.swift */; };
+		B0B402C01EA7D6A1009CB1BA /* MembersHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0B402BE1EA7D6A1009CB1BA /* MembersHeaderCell.xib */; };
 		B0C36F571EA5007F0065E4AB /* EventMessagesTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0C36F561EA5007F0065E4AB /* EventMessagesTableVC.swift */; };
 		B0C36F5B1EA5014A0065E4AB /* EventMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0C36F591EA5014A0065E4AB /* EventMessageCell.swift */; };
 		B0C36F5C1EA5014A0065E4AB /* EventMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0C36F5A1EA5014A0065E4AB /* EventMessageCell.xib */; };
+		B0D3D0D41EA65CB0004A1681 /* EventMessagesTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0D3D0D31EA65CB0004A1681 /* EventMessagesTable.swift */; };
 		B0D5896F1E53868A0008BE2F /* MainPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0D5896E1E53868A0008BE2F /* MainPageViewController.swift */; };
+		B0E392211EA6463E0013F6AC /* CustomHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E3921F1EA6463E0013F6AC /* CustomHeaderCell.swift */; };
+		B0E392221EA6463E0013F6AC /* CustomHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0E392201EA6463E0013F6AC /* CustomHeaderCell.xib */; };
+		B0F0CE381EB6AF79000703CE /* ChatTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F0CE371EB6AF79000703CE /* ChatTableView.swift */; };
+		B0F0CE6A1EB6B9BD000703CE /* ChatVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F0CE691EB6B9BD000703CE /* ChatVC.swift */; };
 		B0F2B7C81E6F16E70017C742 /* Events.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F2B7C71E6F16E70017C742 /* Events.swift */; };
 		B0FD403F1E6DC4CE00D7E242 /* SingleEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0FD403E1E6DC4CE00D7E242 /* SingleEventViewController.swift */; };
 		FBD8059A0359A586FA0EDECF /* Pods_LocationProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC74BC7A86A3949B19C6F03E /* Pods_LocationProject.framework */; };
@@ -81,17 +95,31 @@
 		B082B5AB1E9FE24900F55EED /* FriendRequestTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendRequestTableViewController.swift; sourceTree = "<group>"; };
 		B082B5B11E9FE34B00F55EED /* TableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		B082B5B21E9FE34B00F55EED /* TableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TableViewCell.xib; sourceTree = "<group>"; };
+		B0879ED51EA8E43700190D56 /* EventRequestsTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventRequestsTableView.swift; sourceTree = "<group>"; };
+		B0879ED81EA8E6D600190D56 /* EventRequestCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventRequestCell.swift; sourceTree = "<group>"; };
+		B0879ED91EA8E6D600190D56 /* EventRequestCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventRequestCell.xib; sourceTree = "<group>"; };
 		B099108D1E67593500F60380 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		B099108F1E675A3800F60380 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		B09910911E676A2A00F60380 /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		B0A1F96A1ED07DD000825D95 /* MyEventsHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyEventsHeaderCell.swift; sourceTree = "<group>"; };
+		B0A1F96B1ED07DD000825D95 /* MyEventsHeaderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyEventsHeaderCell.xib; sourceTree = "<group>"; };
 		B0A2135A1E7FF08C003F5D2F /* SingleChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleChatViewController.swift; sourceTree = "<group>"; };
 		B0AD584B1E6D83F9006979C3 /* UserEventsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserEventsController.swift; sourceTree = "<group>"; };
 		B0AF573E1E9D084C00B826DD /* AddFriendPopupController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFriendPopupController.swift; sourceTree = "<group>"; };
 		B0B0DBC81E9F98EF004F9F83 /* FriendRequestsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendRequestsController.swift; sourceTree = "<group>"; };
+		B0B402B91EA7CA54009CB1BA /* SingleEventHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleEventHeaderCell.swift; sourceTree = "<group>"; };
+		B0B402BA1EA7CA54009CB1BA /* SingleEventHeaderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SingleEventHeaderCell.xib; sourceTree = "<group>"; };
+		B0B402BD1EA7D6A1009CB1BA /* MembersHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MembersHeaderCell.swift; sourceTree = "<group>"; };
+		B0B402BE1EA7D6A1009CB1BA /* MembersHeaderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MembersHeaderCell.xib; sourceTree = "<group>"; };
 		B0C36F561EA5007F0065E4AB /* EventMessagesTableVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventMessagesTableVC.swift; sourceTree = "<group>"; };
 		B0C36F591EA5014A0065E4AB /* EventMessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventMessageCell.swift; sourceTree = "<group>"; };
 		B0C36F5A1EA5014A0065E4AB /* EventMessageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventMessageCell.xib; sourceTree = "<group>"; };
+		B0D3D0D31EA65CB0004A1681 /* EventMessagesTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventMessagesTable.swift; sourceTree = "<group>"; };
 		B0D5896E1E53868A0008BE2F /* MainPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainPageViewController.swift; sourceTree = "<group>"; };
+		B0E3921F1EA6463E0013F6AC /* CustomHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomHeaderCell.swift; sourceTree = "<group>"; };
+		B0E392201EA6463E0013F6AC /* CustomHeaderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomHeaderCell.xib; sourceTree = "<group>"; };
+		B0F0CE371EB6AF79000703CE /* ChatTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatTableView.swift; sourceTree = "<group>"; };
+		B0F0CE691EB6B9BD000703CE /* ChatVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatVC.swift; sourceTree = "<group>"; };
 		B0F2B7C71E6F16E70017C742 /* Events.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Events.swift; sourceTree = "<group>"; };
 		B0FD403E1E6DC4CE00D7E242 /* SingleEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleEventViewController.swift; sourceTree = "<group>"; };
 		BC74BC7A86A3949B19C6F03E /* Pods_LocationProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LocationProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -163,6 +191,7 @@
 		B01523641E4A20070043AC2C /* LocationProject */ = {
 			isa = PBXGroup;
 			children = (
+				B0F0CE361EB6AF44000703CE /* Chat */,
 				B01523671E4A20070043AC2C /* ViewController.swift */,
 				B01523651E4A20070043AC2C /* AppDelegate.swift */,
 				B01523871E4A34550043AC2C /* MenuViewController.swift */,
@@ -192,11 +221,14 @@
 		B04EA36B1EA1426B00F89909 /* Events */ = {
 			isa = PBXGroup;
 			children = (
+				B0879ED71EA8E43F00190D56 /* EventRequests */,
+				B0B402C11EA7DB97009CB1BA /* SingleEvent */,
+				B0B402B81EA7CA1B009CB1BA /* SingleEventCells */,
+				B0D3D0D31EA65CB0004A1681 /* EventMessagesTable.swift */,
 				B045B1E11E68486400E8C89D /* AddEventsViewController.swift */,
 				B0F2B7C71E6F16E70017C742 /* Events.swift */,
 				B04EA3691EA1416100F89909 /* MyEventsTableController.swift */,
 				B0C36F581EA5010D0065E4AB /* Cells */,
-				B0FD403E1E6DC4CE00D7E242 /* SingleEventViewController.swift */,
 				B02AEFFC1E53A43C002DEAAA /* EventsViewController.swift */,
 				B0AD584B1E6D83F9006979C3 /* UserEventsController.swift */,
 				B064E2BA1EA3E3970059BCE9 /* MyFriendsEventsTableViewTableViewController.swift */,
@@ -226,6 +258,35 @@
 			name = User_Friends;
 			sourceTree = "<group>";
 		};
+		B0879ED71EA8E43F00190D56 /* EventRequests */ = {
+			isa = PBXGroup;
+			children = (
+				B0879ED51EA8E43700190D56 /* EventRequestsTableView.swift */,
+				B0879ED81EA8E6D600190D56 /* EventRequestCell.swift */,
+				B0879ED91EA8E6D600190D56 /* EventRequestCell.xib */,
+			);
+			name = EventRequests;
+			sourceTree = "<group>";
+		};
+		B0B402B81EA7CA1B009CB1BA /* SingleEventCells */ = {
+			isa = PBXGroup;
+			children = (
+				B0B402B91EA7CA54009CB1BA /* SingleEventHeaderCell.swift */,
+				B0B402BA1EA7CA54009CB1BA /* SingleEventHeaderCell.xib */,
+				B0B402BD1EA7D6A1009CB1BA /* MembersHeaderCell.swift */,
+				B0B402BE1EA7D6A1009CB1BA /* MembersHeaderCell.xib */,
+			);
+			name = SingleEventCells;
+			sourceTree = "<group>";
+		};
+		B0B402C11EA7DB97009CB1BA /* SingleEvent */ = {
+			isa = PBXGroup;
+			children = (
+				B0FD403E1E6DC4CE00D7E242 /* SingleEventViewController.swift */,
+			);
+			name = SingleEvent;
+			sourceTree = "<group>";
+		};
 		B0C36F581EA5010D0065E4AB /* Cells */ = {
 			isa = PBXGroup;
 			children = (
@@ -235,8 +296,21 @@
 				B064E2C01EA3EDB10059BCE9 /* FriendsEventsCell.swift */,
 				B0C36F591EA5014A0065E4AB /* EventMessageCell.swift */,
 				B0C36F5A1EA5014A0065E4AB /* EventMessageCell.xib */,
+				B0E3921F1EA6463E0013F6AC /* CustomHeaderCell.swift */,
+				B0E392201EA6463E0013F6AC /* CustomHeaderCell.xib */,
+				B0A1F96A1ED07DD000825D95 /* MyEventsHeaderCell.swift */,
+				B0A1F96B1ED07DD000825D95 /* MyEventsHeaderCell.xib */,
 			);
 			name = Cells;
+			sourceTree = "<group>";
+		};
+		B0F0CE361EB6AF44000703CE /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				B0F0CE371EB6AF79000703CE /* ChatTableView.swift */,
+				B0F0CE691EB6B9BD000703CE /* ChatVC.swift */,
+			);
+			name = Chat;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -337,11 +411,16 @@
 				B01523861E4A20AB0043AC2C /* GoogleService-Info.plist in Resources */,
 				B082B5B41E9FE34B00F55EED /* TableViewCell.xib in Resources */,
 				B04EA3721EA1501700F89909 /* MyEventsCell.xib in Resources */,
+				B0E392221EA6463E0013F6AC /* CustomHeaderCell.xib in Resources */,
+				B0879EDB1EA8E6D600190D56 /* EventRequestCell.xib in Resources */,
 				B01523701E4A20070043AC2C /* LaunchScreen.storyboard in Resources */,
 				B0C36F5C1EA5014A0065E4AB /* EventMessageCell.xib in Resources */,
+				B0A1F96D1ED07DD000825D95 /* MyEventsHeaderCell.xib in Resources */,
 				B015236D1E4A20070043AC2C /* Assets.xcassets in Resources */,
 				B064E2C31EA3EDB10059BCE9 /* FriendsEventsCell.xib in Resources */,
 				B015236B1E4A20070043AC2C /* Main.storyboard in Resources */,
+				B0B402C01EA7D6A1009CB1BA /* MembersHeaderCell.xib in Resources */,
+				B0B402BC1EA7CA54009CB1BA /* SingleEventHeaderCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -457,20 +536,29 @@
 				B082B5B31E9FE34B00F55EED /* TableViewCell.swift in Sources */,
 				B0D5896F1E53868A0008BE2F /* MainPageViewController.swift in Sources */,
 				B0C36F571EA5007F0065E4AB /* EventMessagesTableVC.swift in Sources */,
+				B0D3D0D41EA65CB0004A1681 /* EventMessagesTable.swift in Sources */,
+				B0A1F96C1ED07DD000825D95 /* MyEventsHeaderCell.swift in Sources */,
 				B04EA36A1EA1416100F89909 /* MyEventsTableController.swift in Sources */,
 				B0F2B7C81E6F16E70017C742 /* Events.swift in Sources */,
+				B0B402BB1EA7CA54009CB1BA /* SingleEventHeaderCell.swift in Sources */,
 				B099108E1E67593500F60380 /* MapViewController.swift in Sources */,
 				B04EA3711EA1501700F89909 /* MyEventsCell.swift in Sources */,
 				B01523681E4A20070043AC2C /* ViewController.swift in Sources */,
+				B0879ED61EA8E43700190D56 /* EventRequestsTableView.swift in Sources */,
 				B0FD403F1E6DC4CE00D7E242 /* SingleEventViewController.swift in Sources */,
 				B0AD584C1E6D83F9006979C3 /* UserEventsController.swift in Sources */,
 				B0C36F5B1EA5014A0065E4AB /* EventMessageCell.swift in Sources */,
 				B09910921E676A2A00F60380 /* ChatViewController.swift in Sources */,
 				B064E2C21EA3EDB10059BCE9 /* FriendsEventsCell.swift in Sources */,
+				B0F0CE381EB6AF79000703CE /* ChatTableView.swift in Sources */,
+				B0E392211EA6463E0013F6AC /* CustomHeaderCell.swift in Sources */,
 				B082B5AC1E9FE24900F55EED /* FriendRequestTableViewController.swift in Sources */,
+				B0879EDA1EA8E6D600190D56 /* EventRequestCell.swift in Sources */,
 				B01523881E4A34550043AC2C /* MenuViewController.swift in Sources */,
 				B045B1E21E68486400E8C89D /* AddEventsViewController.swift in Sources */,
+				B0F0CE6A1EB6B9BD000703CE /* ChatVC.swift in Sources */,
 				B01523661E4A20070043AC2C /* AppDelegate.swift in Sources */,
+				B0B402BF1EA7D6A1009CB1BA /* MembersHeaderCell.swift in Sources */,
 				B0A2135B1E7FF08C003F5D2F /* SingleChatViewController.swift in Sources */,
 				B02AEFFD1E53A43C002DEAAA /* EventsViewController.swift in Sources */,
 				B0B0DBC91E9F98EF004F9F83 /* FriendRequestsController.swift in Sources */,

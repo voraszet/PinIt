@@ -25,6 +25,7 @@ class UserEventsController: UIViewController, UITableViewDelegate, UITableViewDa
             self.eventsModel = Events()
         }
         
+        print("asodnjoasndjansjdknajsk")
         
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         
@@ -102,8 +103,6 @@ class UserEventsController: UIViewController, UITableViewDelegate, UITableViewDa
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //let eventId = self.eventsDictionary[indexPath.row]["eventId"]!
         let eventId = self.eventsModel?.eventsDictionary[indexPath.row]["eventId"]!
-        print(eventId)
-        
         // PUSH VIEW FOR SELECTED EVENT
         self.getSingleEvent(eventId: eventId!)        
     }
@@ -111,6 +110,8 @@ class UserEventsController: UIViewController, UITableViewDelegate, UITableViewDa
     //  Load single event details and push it to view
     func getSingleEvent(eventId:String){
         let ref = FIRDatabase.database().reference(fromURL: "https://locationapp-85fdc.firebaseio.com/").child("events").child(eventId)
+        
+        print("event id \(eventId)")
         
         ref.observe(.value, with: { snapshot in  
             if snapshot.value is NSNull {
@@ -126,9 +127,9 @@ class UserEventsController: UIViewController, UITableViewDelegate, UITableViewDa
                     
                     view.eventName = snapValues["eventName"]! as? String
                     //
-                    view.eventsArray = Array(snapValues.values) as! [String]
+                    //view.eventsArray = Array(snapValues.values) as! [String]
                     //view.eventsDictionary.append(snapValues)
-                    view.eventsDictionary = snapValues
+                    //view.eventsDictionary = snapValues
 
                     //view.eventUser = snapValues["userId"]! as? String
                     //view.eventDescription = snapValues["eventDescription"]! as? String

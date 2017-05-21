@@ -17,7 +17,4 @@ class FriendsEventsCell: UITableViewCell {
     @IBOutlet weak var districtLabel: UILabel!
     
     @IBOutlet weak var statusButton: UIButton!
-    
-
-    
 }

@@ -3,7 +3,7 @@
 import UIKit
 import Firebase
 
-class AddEventsViewController: UIViewController {
+class AddEventsViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate {
     
     @IBOutlet weak var datePicker: UIDatePicker!
     
@@ -15,13 +15,40 @@ class AddEventsViewController: UIViewController {
     @IBOutlet weak var cityTextfield: UITextField!
     @IBOutlet weak var postcodeTextfield: UITextField!
     
-    
+    let tf = UITextField()
     
     
     override func viewDidLoad() {
+        
+        self.eventNameTextfield.delegate = self
+        self.address1Textfield.delegate = self
+        self.address2Textfield.delegate = self
+        self.cityTextfield.delegate = self
+        self.postcodeTextfield.delegate = self
+        self.eventDescriptionTextarea.delegate = self
+        
+        //self.eventDescriptionTextarea.delegate = self as! UITextViewDelegate
+        
         super.viewDidLoad()
         
+        //NotificationCenter.default.addObserver(self, selector: #selector(keyboardShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        //NotificationCenter.default.addObserver(self, selector: #selector(keyboardHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        
+        let UItap: UITapGestureRecognizer = UITapGestureRecognizer(
+            target: self,
+            action: #selector(dismissKeyboard))
+        
+        view.addGestureRecognizer(UItap)
+        
         setDatePickerColor()
+        
+        self.eventNameTextfield.tag = 1
+       // self.eventDescriptionTextarea.tag = 2
+        
+        self.address1Textfield.tag = 3
+        self.address2Textfield.tag = 4
+        self.cityTextfield.tag = 5
+        self.postcodeTextfield.tag = 6        
         
     }
     
@@ -30,10 +57,57 @@ class AddEventsViewController: UIViewController {
         
     }
     
+    func dismissKeyboard(){
+        view.endEditing(true)
+        
+    }
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        NotificationCenter.default.removeObserver(self)
+
+        
+        if ((textField.tag == 3) || (textField.tag == 4) || (textField.tag ==  5) || (textField.tag == 6)) {
+            NotificationCenter.default.addObserver(self, selector: #selector(keyboardShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+            
+            
+            NotificationCenter.default.addObserver(self, selector: #selector(keyboardHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+            
+        }else{
+            NotificationCenter.default.removeObserver(self)
+        }
+       
+        
+    }
+    
+    
+    func keyboardShow(notification: NSNotification){
+        
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            let keyboardHeight = keyboardSize.height
+            //self.view.frame.origin.y -= keyboardHeight
+            self.view.window?.frame.origin.y = -1 * keyboardHeight
+        }
+        
+        
+    }
+    
+    func keyboardHide(notification: NSNotification){
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            let keyboardHeight = keyboardSize.height
+            //self.view.frame.origin.y += keyboardHeight
+            
+            self.view.window?.frame.origin.y += keyboardHeight
+        }   
+    }
+    
     @IBAction func loadMenu() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let secondView: MenuViewController = storyboard.instantiateViewController(withIdentifier: "MenuViewController") as! MenuViewController
-        
         self.present(secondView, animated: true, completion: nil)
     }
     
@@ -100,10 +174,7 @@ class AddEventsViewController: UIViewController {
             })
             
             // SAVE EVENT ID 
-            
-            
-            
-            
+
             let alertBox = UIAlertController(title: "Note!", message: "You have added an event!", preferredStyle: UIAlertControllerStyle.alert)
             alertBox.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
                 self.loadEventsView()

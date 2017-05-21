@@ -27,6 +27,7 @@ class MenuViewController: UIViewController {
     @IBAction func loadEventsView(_ sender: AnyObject) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let view: EventsViewController = storyboard.instantiateViewController(withIdentifier: "EventsViewController") as! EventsViewController
+        
         self.present(view, animated: true, completion: nil)
     }
     //  MAP VIEW
@@ -46,10 +47,11 @@ class MenuViewController: UIViewController {
     
     
     @IBAction func loadFriendsBtn() {
+        // Allocate UIStoryboard to set the storyboard of a project
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        // Connect Friend-Request UIViewController to storyboard
         let view: FriendRequestTableViewController = storyboard.instantiateViewController(withIdentifier: "FriendRequestTableViewController") as! FriendRequestTableViewController
-        //
-        
+        // Specify users table as a database reference
         self.ref.child("users").child(self.currentUser!).child("friends").observe(.value, with: { snapshot in 
             // these two lines are new
             view.friendRequestsDictionary.removeAll()
@@ -68,7 +70,7 @@ class MenuViewController: UIViewController {
                             if snapshot.value is NSNull{
                                 print("empty")
                             } else {
-                                let key = keyValueSnap.key
+                                //let key = keyValueSnap.key
                                 let value = snapshot.value as?  NSDictionary
                                 let username = value?["userName"] as? String ?? ""
                                 let data = ["userName": username,
@@ -90,6 +92,7 @@ class MenuViewController: UIViewController {
     }
     
     
+    
     override func viewDidLoad() {
         //setUsername()
         self.usernameLabel.text = self.usernameString
@@ -98,6 +101,8 @@ class MenuViewController: UIViewController {
         // Rounded label border-radius
         self.friendRequests.layer.masksToBounds = true
         self.friendRequests.layer.cornerRadius = 5
+        
+        
         
         super.viewDidLoad()
         
@@ -135,21 +140,28 @@ class MenuViewController: UIViewController {
         self.present(view, animated: true, completion: nil)
     }
     
-    
+    // Loading the count of number requests in real-time
     func loadFriendRequests(){
-        // changes made here
+        // set friend request count to 0
         var friendRequestCount:Int = 0
-        
-        ref.child("users").child(self.currentUser!).child("friends").observe(.value, with: { snapshot in 
+        // select the users table from a database and query the snapshot with the currently logged in user's id
+        // set the database listener to 'observe' to constantly monitor changes at specified database path
+        // set the event type to 'value' to load all snapshots at specified database path
+        ref.child("users").child(self.currentUser!).child("friends").observe(.value, with: { snapshot in
+            // loop through the snapshots, e.g. a list of friend requests
             for snap in snapshot.children {
                 let keyValueSnap = snap as! FIRDataSnapshot
-                
+                // convert the JSON object into NSDictionary
                 if let keyValue = keyValueSnap.value as? [String:Any] {
-                    
+                    // note that that NSDictionary allows us to access 'key & value' values
+                    // the 'keyValue' variable now holds User ID and Boolean 'true' or 'false' values
                     let friendBooleanValue = keyValue.first!.value as? String
                     
+                    // doing a check, if the current snapshot value is false
+                    // increment friend request count by one
                     if friendBooleanValue == "false" {
                         friendRequestCount = friendRequestCount + 1
+                        // set the amount of friend requests to UILabel
                         self.friendRequests.text = String(friendRequestCount)
                     }
                 }  

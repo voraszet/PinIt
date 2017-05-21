@@ -17,6 +17,4 @@ class TableViewCell: UITableViewCell {
     
     @IBAction func declineButton() {
     }
-    
-    
 }

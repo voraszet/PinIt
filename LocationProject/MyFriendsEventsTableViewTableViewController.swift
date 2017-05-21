@@ -15,6 +15,7 @@ class MyFriendsEventsTableViewTableViewController: UITableViewController {
     let ref = FIRDatabase.database().reference(fromURL: "https://locationapp-85fdc.firebaseio.com/")
     let currentUser = FIRAuth.auth()?.currentUser?.uid
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.contentInset = UIEdgeInsetsMake(35, 0, 0, 0);
@@ -28,7 +29,7 @@ class MyFriendsEventsTableViewTableViewController: UITableViewController {
         let tryRef = FIRDatabase.database().reference(fromURL: "https://locationapp-85fdc.firebaseio.com/").child("events").queryOrdered(byChild: "userId").queryEqual(toValue: userId)
         
         tryRef.observeSingleEvent(of: .value , with: { snapshot in
-            if snapshot.value is NSNull {
+            /*if snapshot.value is NSNull {
                 print("empty records")
             } else {
                 for child in (snapshot.children) {
@@ -40,14 +41,18 @@ class MyFriendsEventsTableViewTableViewController: UITableViewController {
                                        "eventId": snap.key,
                                        "eventDate": dict["eventDate"],
                                        "eventDescription" : dict["eventDescription"],
-                                       "eventCity" : dict["eventCity"]
+                                       "eventCity" : dict["eventCity"],
+                                       "eventPostcode" : "PAPAPA"
+                                       
                     ]
                     
                     
                     self.eventsDictionary.append(eventsArray as! [String: String])
+                    
+                    print("DICT \(self.eventsDictionary)")
                     self.tableView.reloadData()
                 }
-            }
+            } */
         })
     }
 
@@ -57,25 +62,61 @@ class MyFriendsEventsTableViewTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.eventsDictionary.count
+        var numb = self.eventsDictionary.count + 1 
+        return numb
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = Bundle.main.loadNibNamed("FriendsEventsCell", owner: self, options: nil)?.first as! FriendsEventsCell
+        let header = Bundle.main.loadNibNamed("MyEventsHeaderCell", owner: self, options: nil)?.first as! MyEventsHeaderCell
         
-        cell.statusButton.addTarget(self, action: #selector(hi), for: .touchUpInside)
-        
-        cell.titleLabel.text = self.eventsDictionary[indexPath.row]["eventName"]!
-        cell.districtLabel.text = "Essex"
-        cell.timeLabel.text = "12 : 15"
-        cell.dateLabel.text = self.eventsDictionary[indexPath.row]["eventDate"]!
-        cell.cityLabel.text = self.eventsDictionary[indexPath.row]["eventCity"]!
-        
-        return cell
+        //let eventId = self.eventsDictionary[indexPath.row]["eventId"]!
+        if indexPath.row == 0 {
+            header.backButton.addTarget(self, action: #selector(backToEvents), for: .touchUpInside)
+            header.titleLabel.text = "My Friends Events"
+            return header
+        } else {
+            cell.statusButton.addTarget(self, action: #selector(self.checkEventId), for: .touchUpInside)
+            cell.statusButton.tag = indexPath.row
+            
+            cell.titleLabel.text = self.eventsDictionary[indexPath.row-1]["eventName"]!
+            //cell.districtLabel.text = self.eventsDictionary[indexPath.row-1]["eventPostcode"]!
+            cell.districtLabel.text = "USERRRR"
+            //
+            self.ref.child("users").child(self.eventsDictionary[indexPath.row-1]["userId"]!).observeSingleEvent(of: .value, with: { snapshot in 
+                
+                if let x = snapshot.value as? [String:Any]{
+                    print(x["userName"]!)
+                    cell.districtLabel.text = "By: \(x["userName"]! as! String)"
+                }    
+            })
+
+            cell.timeLabel.text = "Date"
+            cell.dateLabel.text = self.eventsDictionary[indexPath.row-1]["eventDate"]!
+            cell.cityLabel.text = self.eventsDictionary[indexPath.row-1]["eventCity"]!
+            return cell
+        }
+            
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 150
+        if indexPath.row == 0 {
+            return UITableViewAutomaticDimension
+        } else {
+            return 150
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let eventId = self.eventsDictionary[indexPath.row-1]["eventId"]!
+        self.getSingleEvent(eventId: eventId)
+    }
+    
+    func backToEvents(){
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let view: EventsViewController = storyboard.instantiateViewController(withIdentifier: "EventsViewController") as! EventsViewController
+        
+        self.present(view, animated: true, completion: nil)
     }
     
     func friendEventList(){
@@ -110,21 +151,60 @@ class MyFriendsEventsTableViewTableViewController: UITableViewController {
                                    "eventId": snap.key,
                                    "eventDate": dict["eventDate"],
                                    "eventDescription" : dict["eventDescription"],
-                                   "eventCity" : dict["eventCity"]
+                                   "eventCity" : dict["eventCity"],
+                                   "eventPostcode" : dict["eventPostcode"]
                 ]
                 
                 
                 self.eventsDictionary.append(eventsArray as! [String: String])
                 self.tableView.reloadData()
             }
-            
         })
     }
     
-
+    func checkEventId(sender: UIButton){
+        let tag = sender.tag
+        print(tag)
+    } 
     
-    func hi(){
-        print("hi")
+    //  Load single event details and push it to view
+    func getSingleEvent(eventId:String){
+        let ref = FIRDatabase.database().reference(fromURL: "https://locationapp-85fdc.firebaseio.com/").child("events").child(eventId)
+        
+        ref.observe(.value, with: { snapshot in
+            if snapshot.value is NSNull {
+                print("Empty snapshot")
+            } 
+            else 
+            { 
+                if let snapValues = snapshot.value as? [String: Any]{
+                    
+                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                    let view: SingleEventViewController = storyboard.instantiateViewController(withIdentifier: "SingleEventViewController") as! SingleEventViewController
+
+                    
+                    let eventsArray = ["eventName" : snapValues["eventName"],
+                                       "userId": snapValues["userId"],
+                                       "eventId": eventId,
+                                       "eventDate": snapValues["eventDate"],
+                                       "eventDescription" : snapValues["eventDescription"],
+                                       "eventCity" : snapValues["eventCity"],
+                                       "eventPostcode" : snapValues["eventPostcode"]
+                    ]
+                    
+                    view.eventDicionary.append(eventsArray as! [String : String])
+                    view.eventName = snapValues["eventName"]! as? String
+                    view.eventId = snapValues["eventId"]! as? String
+                    view.adrijus = snapValues["eventName"]! as? String
+                    
+                    //view.eventsDictionary.append(snapValues)
+                    
+                    //view.eventUser = snapValues["userId"]! as? String
+                    //view.eventDescription = snapValues["eventDescription"]! as? String
+                    self.present(view, animated: true, completion: nil) 
+                }
+            }
+        }) 
     }
     
 

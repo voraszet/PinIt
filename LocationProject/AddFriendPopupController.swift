@@ -40,8 +40,14 @@ class AddFriendPopupController: UIViewController {
         ref.observe(.value, with: { snapshot in 
             if(snapshot.value is NSNull) {
                 print("User doesn't exist!")
+                let alertBox = UIAlertController(title: "Alert", message: "User doesn't exist!", preferredStyle: UIAlertControllerStyle.alert)
+                alertBox.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                self.present(alertBox, animated: true, completion: nil)
+                
             } else {
-                print("Invitation sent!")
+                let alertBox = UIAlertController(title: "Alert", message: "Invitation is sent!", preferredStyle: UIAlertControllerStyle.alert)
+                alertBox.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                self.present(alertBox, animated: true, completion: nil)
                 
                 for snap in snapshot.children {
                     let singleSnapshot = snap as! FIRDataSnapshot

@@ -103,9 +103,11 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     func transitionToSingleChatLog(userId : String, userName : String){
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let view: SingleChatViewController = storyboard.instantiateViewController(withIdentifier: "SingleChatViewController") as! SingleChatViewController
+        let VC: ChatVC = storyboard.instantiateViewController(withIdentifier: "ChatVC") as! ChatVC
         
         view.userName = userName
         view.userId = userId
+        
         
         self.present(view, animated: true, completion: nil) 
     }
@@ -134,7 +136,7 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
         cell.textLabel?.text = self.usersDictionary[indexPath.row]["userName"]
-        cell.detailTextLabel?.text = self.usersDictionary[indexPath.row]["userId"] 
+        //cell.detailTextLabel?.text = self.usersDictionary[indexPath.row]["userId"] 
         
         return cell
     }

@@ -10,7 +10,7 @@
 import UIKit
 import Firebase
 
-class SingleChatViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class SingleChatViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
     
     var ref = FIRDatabase.database().reference(fromURL: "https://locationapp-85fdc.firebaseio.com/")
     
@@ -22,64 +22,61 @@ class SingleChatViewController: UIViewController, UITableViewDelegate, UITableVi
     var userName:String?
     var userId:String?
     var messageDictionary = [[String:String]]()
-
+    
+    
+    let currentUser = FIRAuth.auth()?.currentUser?.uid
     
     override func viewDidLoad() {
+        
         usernameLabel.text = userName
         
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorStyle = .none
+        messageTextfield.delegate = self
+        messageTextfield.isUserInteractionEnabled = true
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        
+        let UItap: UITapGestureRecognizer = UITapGestureRecognizer(
+            target: self,
+            action: #selector(dismissKeyboard))
+        
+        view.addGestureRecognizer(UItap)
         
         loadMessage()
-        checkNewMessageTimer()
+        self.loadOneM()
+        
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.loadData()
-    }
-    
-    func checkNewMessageTimer(){
-        timer = Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(self.loadData), userInfo: nil, repeats: true)
-    }
-    
-    func loadData(){
-        let receiverId = userId
-        let currentUser = FIRAuth.auth()?.currentUser?.uid
-        let reference = FIRDatabase.database().reference(fromURL: "https://locationapp-85fdc.firebaseio.com/").child("monitorChanges").child("messages").child(receiverId!).child(currentUser!)
         
-        reference.observe(.value, with: { snapshot in
-            if(snapshot.value as? String == "true") {
-                print(snapshot)
-                
-                //self.messageDictionary.removeAll()
-                //self.tableView.reloadData()
-                //
-                let monitorData = [currentUser!: "false"]
-                reference.updateChildValues(monitorData)
-                //self.loadMessage()
-                
-                //print(snapshot.value!)
-                //print("true")
-                //self.loadSingleMessage()
-                //self.loadMessage()
-                //self.tableView.reloadData()
-            }
-        })
     }
+
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
+    func dismissKeyboard() {
+        //view.endEditing(true)
+        messageTextfield.resignFirstResponder()
+    }
+    
     
     @IBAction func goBack() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let view: ChatViewController = storyboard.instantiateViewController(withIdentifier: "ChatViewController") as! ChatViewController
+        
+        self.messageDictionary.removeAll()
+        
         self.present(view, animated: true, completion: nil)
-        self.timer.invalidate()
+        //self.timer.invalidate()
+        
     }
     
     @IBAction func sendMessage() {
@@ -94,19 +91,21 @@ class SingleChatViewController: UIViewController, UITableViewDelegate, UITableVi
         userRef.observe(.value, with: { snapshot in 
             if let snap = snapshot.value as? [String:Any]{
                 let username = snap["userName"]! as! String
-                let messageData = ["messageId": messageId1, "userName":username, "message": message!]
+                let messageData = ["messageId": messageId1, "userName":username, "message": message!, "userId":self.currentUser!]
                 
                 self.ref.child("messages").child(messageId1).childByAutoId().setValue(messageData)
                 self.ref.child("messages").child(messageId2).childByAutoId().setValue(messageData)
                 // LOAD SINGLE MESSAGE 
-                self.loadSingleMessage()
+                //self.loadSingleMessage()
+                
             }
         })
-        
+        messageTextfield.text = ""
         ref.child("monitorChanges").child("messages").child(receiverId!).updateChildValues(monitorData)
+        
     }
     
-    
+
     // FUNCTION TO LOAD ALL MESSAGES 
     func loadMessage(){
         let senderId = FIRAuth.auth()?.currentUser?.uid
@@ -119,8 +118,13 @@ class SingleChatViewController: UIViewController, UITableViewDelegate, UITableVi
         
         let ref = FIRDatabase.database().reference(fromURL: "https://locationapp-85fdc.firebaseio.com/").child("messages").child(messageId)
         
+        
+        
         // MESSAGE ID 1
         ref.observeSingleEvent(of: .value, with: { snapshot in
+            // remove all 
+            self.messageDictionary.removeAll()
+            
             for snap in snapshot.children {
                 let message = snap as! FIRDataSnapshot
                 if let snap = snapshot.value as? [String:Any]{
@@ -128,40 +132,25 @@ class SingleChatViewController: UIViewController, UITableViewDelegate, UITableVi
                         let message = messageValue["message"]!
                         let messageId = messageValue["messageId"]!
                         let user = messageValue["userName"]!
+                        let userId = messageValue["userId"]!
                         
                         let messageArray = ["message" : message,
                                             "messageId": messageId,
-                                            "userName": user
+                                            "userName": user,
+                                            "userId" : userId
                         ]
                         
                         self.messageDictionary.append(messageArray)
                         self.tableView.reloadData()
                         self.setMessageIndexToBottom()
+                        
+                        print("---------------------------------------------------------------")
+                        print("TEST DICT \(self.messageDictionary)")
+                        print("---------------------------------------------------------------")
                     }
                 }
             }
         })
-        
-        // MESSAGE ID 2
-        /*ref2.observeSingleEvent(of: .value, with: { snapshot in 
-         for snap in snapshot.children {
-         let message = snap as! FIRDataSnapshot
-         
-         if let messageValue = message.value as? [String: String] {
-         let message = messageValue["message"]!
-         let messageId = messageValue["messageId"]!
-         
-         let messageArray = ["message" : message,
-         "messageId": messageId
-         ]
-         
-         self.messageDictionary.append(messageArray)
-         self.tableView.reloadData()
-         self.setMessageIndexToBottom()
-         
-         }
-         }
-         })*/
     }
     
     func setMessageIndexToBottom(){
@@ -169,70 +158,115 @@ class SingleChatViewController: UIViewController, UITableViewDelegate, UITableVi
         self.tableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
     }
     
-    // FUNCTION TO LOAD SINGLE MESSAGE FROM DATABSE
-    func loadSingleMessage(){
+    
+    func loadOneM(){
         let senderId = FIRAuth.auth()?.currentUser?.uid
         let receiverId = userId
         let messageId = ("\(senderId!+receiverId!)")
-        let messageId2 = ("\(receiverId!+senderId!)")
+
         
-        //let ref = FIRDatabase.database().reference(fromURL: "https://locationapp-85fdc.firebaseio.com/").child("messages").queryOrdered(byChild: "messageId").queryEqual(toValue: messageId)
-        
-        
-        let ref = FIRDatabase.database().reference(fromURL: "https://locationapp-85fdc.firebaseio.com/").child("messages").child(messageId)
-        // USERD .CHILDADDED TO APPEND ONE UPDATED VALUE INSTEAD OF ALL
-        ref.observeSingleEvent(of: FIRDataEventType.childAdded, with: { snapshot in 
+        let ref = FIRDatabase.database().reference(fromURL: "https://locationapp-85fdc.firebaseio.com/").child("messages").child(messageId).queryLimited(toLast: 1).observe(.childAdded, with: { snapshot in 
             
             if let message = snapshot.value as? [String: Any]{
                 let textMessage = message["message"]! as! String
                 let textMessageUser = message["userName"]! as! String
+                let userId = message["userId"]! as! String
                 
                 let messageArray = ["message" : textMessage,
                                     "messageId": messageId,
-                                    "userName": textMessageUser
+                                    "userName": textMessageUser,
+                                    "userId" : userId
                 ]
                 
                 self.messageDictionary.append(messageArray)
                 self.tableView.reloadData()
                 
                 self.setMessageIndexToBottom()
+                
+                print("MY LAST M ::: \(textMessage)")
+                
+                
             }
+            
+        
         })
         
-        /*ref2.observeSingleEvent(of: FIRDataEventType.childAdded, with: { snapshot in 
-         
-         if let message = snapshot.value as? [String: Any]{
-         let textMessage = message["message"]! as! String
-         
-         let messageArray = ["message" : textMessage,
-         "messageId": messageId
-         ]
-         
-         self.messageDictionary.append(messageArray)
-         self.tableView.reloadData()
-         
-         self.setMessageIndexToBottom()
-         }
-         })*/
     }
     
     
-    //let cell: UITableViewCell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "cell")
-    //cell.textLabel?.textAlignment = NSTextAlignment.center
-    //http://stackoverflow.com/questions/34701782/how-to-align-a-uilabel-left-or-right-in-a-uitableviewcell
+    
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: UITableViewCell = UITableViewCell(style: UITableViewCellStyle.subtitle, reuseIdentifier: "cell")
         
-        cell.textLabel?.text = self.messageDictionary[indexPath.row]["userName"]
-        cell.detailTextLabel?.text = self.messageDictionary[indexPath.row]["message"]
+        let uId = self.messageDictionary[indexPath.row]["userId"]
+        var totalRow = tableView.numberOfRows(inSection: indexPath.section)
         
-        return cell
+
+        
+        if  uId == currentUser {
+            //let cell: UITableViewCell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "cell")
+            let cell = Bundle.main.loadNibNamed("EventMessageCell", owner: self, options: nil)?.first as! EventMessageCell
+            
+            cell.messageLabel.textAlignment = .right
+            cell.usernameLabel.textAlignment = .right
+            cell.messageLabel.layer.masksToBounds = true
+            cell.messageLabel.layer.cornerRadius = 5
+            
+            
+            cell.messageLabel.text = self.messageDictionary[indexPath.row]["message"]
+            cell.usernameLabel.text = self.messageDictionary[indexPath.row]["userName"]
+            
+            return cell
+        } else {
+            let cell = Bundle.main.loadNibNamed("EventMessageCell", owner: self, options: nil)?.first as! EventMessageCell
+            
+            cell.messageLabel.textAlignment = .left
+            cell.usernameLabel.textAlignment = .left
+            cell.messageLabel.layer.masksToBounds = true
+            cell.messageLabel.layer.cornerRadius = 5
+            
+            
+            cell.messageLabel.text = self.messageDictionary[indexPath.row]["message"]
+            cell.usernameLabel.text = self.messageDictionary[indexPath.row]["userName"]
+            
+            return cell
+        }
+        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.messageDictionary.count
     }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
+    }
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
+    }
+    
+    
+    
+    
+    
+    func keyboardWillShow(notification: NSNotification) {        
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            let keyboardHeight = keyboardSize.height
+            self.view.frame.origin.y -= keyboardHeight
+        }  
+    }
+    
+    func keyboardWillHide(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            let keyboardHeight = keyboardSize.height
+            self.view.frame.origin.y += keyboardHeight
+        }  
+    }
+    
+    
+    
+    
     
     
 }

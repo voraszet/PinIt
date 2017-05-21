@@ -41,8 +41,4 @@ class FriendRequestsController: UIViewController, UITableViewDelegate, UITableVi
 
         return cell
     }
-
-    
-
-
 }

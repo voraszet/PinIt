@@ -36,6 +36,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         
         
         self.displayMap(long: location.coordinate.longitude, lat: location.coordinate.latitude)
+        
+        
+        //
+        let geoCoder = CLGeocoder()
+
     }
     
     func displayMap(long:Double, lat:Double){
